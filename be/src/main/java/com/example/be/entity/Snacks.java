@@ -46,6 +46,9 @@ public class Snacks {
     @Column(name = "unit")
     private String unit;
 
+    @Column(name = "status")
+    private Integer status;
+
     @NotNull
     @Column(name = "created_by")
     private String createdBy;
