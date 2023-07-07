@@ -420,7 +420,7 @@ CREATE TABLE `ticket_booking`.`order_snack` (
   `id_snack` BIGINT NOT NULL,
   `id_combo` BIGINT NOT NULL,
   `price` DECIMAL NOT NULL,
-  `quantity` BIGINT NOT NULL,
+  `quantity` INT NOT NULL,
   `note` VARCHAR(145) NULL,
   `status` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -481,6 +481,7 @@ CREATE TABLE `ticket_booking`.`order_snack` (
 `id` BIGINT NOT NULL AUTO_INCREMENT,
  `id_snacks` BIGINT NOT NULL,
   `id_combo` BIGINT NOT NULL,
+  `quantity` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `FK_CB_Detail_Snacks_idx` (`id_snacks` ASC) VISIBLE,
   CONSTRAINT `FK_CB_Snacks`
