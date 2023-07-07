@@ -38,7 +38,7 @@ public class SalePayment {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_order", referencedColumnName = "id")
     private Order order;
 }
