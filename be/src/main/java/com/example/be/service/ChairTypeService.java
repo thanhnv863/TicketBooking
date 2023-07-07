@@ -7,6 +7,5 @@ import java.util.List;
 
 public interface ChairTypeService {
     void save(ChairTypeRequest chairTypeRequest);
-
     List<ChairType> getAll();
 }

@@ -19,7 +19,7 @@ import java.util.Date;
 
 
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 @Data
 @Builder
 @AllArgsConstructor
@@ -52,7 +52,7 @@ public class Order {
     private BigDecimal totalAmount;
 
     @Column(name = "total_after_reduction")
-    private BigDecimal totalAfter_reduction;
+    private BigDecimal totalAfterReduction;
 
     @NotNull
     @Column(name = "created_by")

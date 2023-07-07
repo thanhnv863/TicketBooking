@@ -364,7 +364,7 @@ CREATE TABLE `ticket_booking`.`combo` (
   UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE);
 
 
-CREATE TABLE `ticket_booking`.`order` (
+CREATE TABLE `ticket_booking`.`orders` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `id_customer` BIGINT NOT NULL,
   `id_employee` BIGINT NOT NULL,
@@ -404,7 +404,7 @@ CREATE TABLE `ticket_booking`.`order_ticket` (
   INDEX `FK_OT_T_idx` (`id_ticket` ASC) VISIBLE,
   CONSTRAINT `FK_OT_O`
     FOREIGN KEY (`id_order`)
-    REFERENCES `ticket_booking`.`order` (`id`)
+    REFERENCES `ticket_booking`.`orders` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `FK_OT_T`
@@ -429,7 +429,7 @@ CREATE TABLE `ticket_booking`.`order_snack` (
   INDEX `FK_OS_C_idx` (`id_combo` ASC) VISIBLE,
   CONSTRAINT `FK_OS_O`
     FOREIGN KEY (`id_order`)
-    REFERENCES `ticket_booking`.`order` (`id`)
+    REFERENCES `ticket_booking`.`orders` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `FK_OS_S`
@@ -471,7 +471,7 @@ CREATE TABLE `ticket_booking`.`order_snack` (
   INDEX `FK_SP_O_idx` (`id_order` ASC) VISIBLE,
   CONSTRAINT `FK_SP_O`
     FOREIGN KEY (`id_order`)
-    REFERENCES `ticket_booking`.`order` (`id`)
+    REFERENCES `ticket_booking`.`orders` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
     );
