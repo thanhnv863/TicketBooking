@@ -43,9 +43,11 @@ app.config(function ($routeProvider, $locationProvider) {
     })
     .when("/food", {
       templateUrl: "../src/pages/foodCombo/food.html",
+      controller: foodController,
     })
     .when("/combo", {
       templateUrl: "../src/pages/foodCombo/combo.html",
+      controller: comboController,
     })
     .when("/sell", {
       templateUrl: "../src/pages/sell.html",
@@ -64,3 +66,4 @@ app.config(function ($routeProvider, $locationProvider) {
     })
     .otherwise("/sell");
 });
+
