@@ -49,6 +49,9 @@ public class Ticket {
     @Column(name = "status")
     private Integer status;
 
+    @Column(name = "code")
+    private String code;
+
     @NotNull
     @Column(name = "created_by")
     private String createdBy;
