@@ -4,6 +4,7 @@ import com.example.be.entity.SalePayment;
 import com.example.be.repository.SalePaymentRepository;
 import com.example.be.request.SalePaymentRequest;
 import com.example.be.service.SalePaymentService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -28,6 +29,7 @@ public class SalePaymentServiceImpl implements SalePaymentService {
         return salePaymentRepository.findById(id).get();
     }
 
+    @Transactional
     @Override
     public SalePayment add(SalePaymentRequest salePaymentRequest) {
         Date date = new Date();
@@ -40,6 +42,7 @@ public class SalePaymentServiceImpl implements SalePaymentService {
         return salePaymentRepository.save(salePayment);
     }
 
+    @Transactional
     @Override
     public SalePayment update(Long id, SalePaymentRequest salePaymentRequest) {
         Date date = new Date();
