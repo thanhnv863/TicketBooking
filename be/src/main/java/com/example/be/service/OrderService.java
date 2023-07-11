@@ -2,11 +2,13 @@ package com.example.be.service;
 
 import com.example.be.entity.Order;
 import com.example.be.request.OrderRequest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 public interface OrderService {
-    List<Order> getAll();
+    Page<Order> getAll(Integer pageNo);
 
     Order getOne(Long id);
 
@@ -18,11 +20,14 @@ public interface OrderService {
 
     Order deleteSoft(Long id, OrderRequest orderRequest);
 
-    List<Order> findAllByStatus();
+    Page<Order> findAllByStatus(Integer pageNo);
 
-    List<Order> sortDescendingDate();
+    Page<Order> sortDescendingDate(Integer pageNo);
 
-    List<Order> sortUpDate();
+    Page<Order> sortUpDate(Integer pageNo);
 
+    Page<Order> sortDescendingTime(Integer pageNo);
+
+    Page<Order> sortUpTime(Integer pageNo);
 
 }

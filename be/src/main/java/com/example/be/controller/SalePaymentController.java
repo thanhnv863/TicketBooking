@@ -4,6 +4,7 @@ import com.example.be.entity.SalePayment;
 import com.example.be.request.SalePaymentRequest;
 import com.example.be.service.impl.SalePaymentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,9 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/sale-payment")
@@ -24,8 +24,8 @@ public class SalePaymentController {
     private SalePaymentServiceImpl salePaymentService;
 
     @GetMapping("/get-all")
-    public List<SalePayment> getAll() {
-        return salePaymentService.getAll();
+    public Page<SalePayment> getAll(@RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo) {
+        return salePaymentService.getAll(pageNo);
     }
 
     @GetMapping("/get-one/{id}")
