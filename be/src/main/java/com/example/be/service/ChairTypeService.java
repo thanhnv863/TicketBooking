@@ -7,5 +7,8 @@ import java.util.List;
 
 public interface ChairTypeService {
     void save(ChairTypeRequest chairTypeRequest);
+
     List<ChairType> getAll();
+
+    void updateStatus(Long id, Integer status);
 }

@@ -42,4 +42,11 @@ public class ChairTypeServiceImpl implements ChairTypeService {
     public List<ChairType> getAll() {
         return chairTypeRepository.findAll();
     }
+
+    @Override
+    public void updateStatus(Long id, Integer status) {
+        ChairType chairType = chairTypeRepository.findById(id).get();
+        chairType.setStatus(status);
+        chairTypeRepository.save(chairType);
+    }
 }

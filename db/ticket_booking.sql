@@ -43,6 +43,10 @@ CREATE TABLE `ticket_booking`.`directors` (
   `age_limit` VARCHAR(50) NOT NULL,
   `time` INT NOT NULL,
   `status` INT NOT NULL,
+   `created_by` VARCHAR(45) NOT NULL,
+  `updated_by` VARCHAR(45) NULL,
+  `created_time` DATETIME NOT NULL,
+  `updated_time` DATETIME NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE,
   INDEX `FK_M_D_idx` (`id_director` ASC) VISIBLE,
@@ -74,7 +78,7 @@ CREATE TABLE `ticket_booking`.`movie_genre` (
 CREATE TABLE `ticket_booking`.`image` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `id_movie` BIGINT NOT NULL,
-  `link` VARCHAR(50) NOT NULL,
+  `link` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `FK_IMG_M_idx` (`id_movie` ASC) VISIBLE,
   CONSTRAINT `FK_IMG_M`
@@ -129,7 +133,7 @@ CREATE TABLE `ticket_booking`.`producer_movie` (
 CREATE TABLE `ticket_booking`.`room` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
-  `total_chair` DECIMAL NOT NULL,
+  `total_chair` INT NOT NULL,
   `status` INT NOT NULL,
   `created_by` VARCHAR(45) NOT NULL,
   `updated_by` VARCHAR(45) NULL,
@@ -250,7 +254,7 @@ CREATE TABLE `ticket_booking`.`ticket` (
   `created_time` DATETIME NOT NULL,
   `updated_time` DATETIME NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `status_UNIQUE` (`status` ASC) VISIBLE,
+  UNIQUE INDEX `code_UNIQUE` (`code` ASC) VISIBLE,
   INDEX `FK_T_TP_idx` (`id_ticket_price` ASC) VISIBLE,
   INDEX `FK_T_C_idx` (`id_chair` ASC) VISIBLE,
   INDEX `FK_T_TT_idx` (`id_type_ticket` ASC) VISIBLE,
@@ -284,7 +288,7 @@ CREATE TABLE `ticket_booking`.`customer` (
   `username` VARCHAR(45) NOT NULL,
   `password` VARCHAR(100) NOT NULL,
   `birthday` DATE NOT NULL,
-  `address` VARCHAR(145) NOT NULL,
+  `address` VARCHAR(145)  NULL,
   `phone_number` VARCHAR(13) NOT NULL,
   `status` INT NOT NULL,
   `created_by` VARCHAR(45) NOT NULL,
@@ -293,7 +297,8 @@ CREATE TABLE `ticket_booking`.`customer` (
   `updated_time` DATETIME NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE,
-  UNIQUE INDEX `password_UNIQUE` (`password` ASC) VISIBLE,
+	INDEX `password_UNIQUE` (`phone_number` ASC) VISIBLE,
+ UNIQUE INDEX `phonenumber_UNIQUE` (`password` ASC) VISIBLE,
   UNIQUE INDEX `code_UNIQUE` (`code` ASC) VISIBLE);
 
 
@@ -313,6 +318,7 @@ CREATE TABLE `ticket_booking`.`employee` (
   `updated_time` DATETIME NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `code_UNIQUE` (`code` ASC) VISIBLE,
+  UNIQUE INDEX `sdt_UNIQUE` (`phone_number` ASC) VISIBLE,
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE);
   
   
@@ -342,7 +348,7 @@ CREATE TABLE `ticket_booking`.`snacks` (
   `updated_time` DATETIME NULL,
   PRIMARY KEY (`id`),
  --  UNIQUE INDEX `id_snack_type_UNIQUE` (`id_snack_type` ASC) VISIBLE,
-   INDEX `id_snack_type_UNIQUE` (`id_snack_type` ASC) VISIBLE,
+   INDEX `id_snack_type` (`id_snack_type` ASC) VISIBLE,
   CONSTRAINT `FK_S_ST`
     FOREIGN KEY (`id_snack_type`)
     REFERENCES `ticket_booking`.`snacks_type` (`id`)
@@ -417,8 +423,8 @@ CREATE TABLE `ticket_booking`.`order_ticket` (
 CREATE TABLE `ticket_booking`.`order_snack` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `id_order` BIGINT NOT NULL,
-  `id_snack` BIGINT NOT NULL,
-  `id_combo` BIGINT NOT NULL,
+  `id_snack` BIGINT NULL,
+  `id_combo` BIGINT NULL,
   `price` DECIMAL NOT NULL,
   `quantity` INT NOT NULL,
   `note` VARCHAR(145) NULL,
@@ -466,7 +472,7 @@ CREATE TABLE `ticket_booking`.`order_snack` (
   `id_order` BIGINT NOT NULL,
   `amount` DECIMAL NOT NULL,
   `payment_time` DATETIME NOT NULL,
-  `description` VARCHAR(150) NOT NULL,
+  `description` VARCHAR(150) NULL,
   PRIMARY KEY (`id`),
   INDEX `FK_SP_O_idx` (`id_order` ASC) VISIBLE,
   CONSTRAINT `FK_SP_O`
