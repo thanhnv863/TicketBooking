@@ -38,6 +38,12 @@ public class Chair {
     @JoinColumn(name = "id_chair_type", referencedColumnName = "id")
     private ChairType chairType;
 
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "wait_time")
+    private Integer waitTime;
+
     @NotNull
     @Column(name = "status")
     private Integer status;

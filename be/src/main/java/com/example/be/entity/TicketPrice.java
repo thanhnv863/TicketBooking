@@ -14,6 +14,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.sql.Time;
 import java.util.Date;
 
@@ -34,11 +35,14 @@ public class TicketPrice {
 
     @ManyToOne
     @JoinColumn(name = "id_type_ticket", referencedColumnName = "id")
-    private TypeTicket customer;
+    private TypeTicket typeTicket;
 
     @ManyToOne
     @JoinColumn(name = "id_type_chair", referencedColumnName = "id")
     private ChairType chairType;
+
+    @Column(name = "price")
+    private BigDecimal price;
 
     @NotNull
     @Column(name = "created_by")

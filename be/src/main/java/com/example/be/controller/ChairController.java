@@ -1,13 +1,20 @@
 package com.example.be.controller;
 
-import com.example.be.entity.Chair;
+import com.example.be.request.ChairRequest;
+import com.example.be.response.ChairResponse;
 import com.example.be.service.ChairService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/chair")
@@ -16,7 +23,29 @@ public class ChairController {
     private ChairService chairService;
 
     @GetMapping("/get-all")
-    public List<Chair> getAll() {
-        return chairService.getAll();
+    public Page<ChairResponse> getAll(@RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo) {
+        return chairService.getAll(pageNo);
     }
+
+    @PostMapping("/save")
+    public ResponseEntity<String> save(@RequestBody ChairRequest chairRequest) {
+        chairService.save(chairRequest);
+        return ResponseEntity.ok("Ok");
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Long id) {
+        chairService.delete(id);
+        return "OK";
+    }
+
+    @PutMapping("/update/{id}")
+    public String update(
+            @PathVariable("id") Long id,
+            @RequestBody ChairRequest chairRequest
+    ) {
+        chairService.update(id, chairRequest);
+        return "Ok";
+    }
+
 }
