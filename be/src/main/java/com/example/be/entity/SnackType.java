@@ -11,16 +11,18 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.Date;
 
 
 @Entity
-@Table(name = "snack_type")
+@Table(name = "snacks_type")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class SnackType {
 
     @Id
