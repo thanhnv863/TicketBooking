@@ -5,10 +5,12 @@ import com.example.be.repository.SalePaymentRepository;
 import com.example.be.request.SalePaymentRequest;
 import com.example.be.service.SalePaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.List;
 
 @Service
 public class SalePaymentServiceImpl implements SalePaymentService {
@@ -16,8 +18,9 @@ public class SalePaymentServiceImpl implements SalePaymentService {
     private SalePaymentRepository salePaymentRepository;
 
     @Override
-    public List<SalePayment> getAll() {
-        return salePaymentRepository.findAll();
+    public Page<SalePayment> getAll(Integer pageNo) {
+        Pageable pageable = PageRequest.of(pageNo, 10);
+        return salePaymentRepository.findAll(pageable);
     }
 
     @Override

@@ -3,9 +3,9 @@ package com.example.be.controller;
 import com.example.be.entity.Order;
 import com.example.be.request.OrderRequest;
 import com.example.be.service.impl.OrderServiceImpl;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,10 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/order")
@@ -30,35 +28,14 @@ public class OrderController {
 
     //getAll
     @GetMapping("/get-all")
-    public List<Order> getAll() {
-        return orderService.getAll();
+    public Page<Order> getAll(@RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo) {
+        return orderService.getAll(pageNo);
     }
 
     //findAllStatus
     @GetMapping("/get-all-status")
-    @ResponseBody
-    public ResponseEntity<String> getAllStatus() {
-        List<Order> order = orderService.findAllByStatus();
-//        List<OrderRequest> listOrder = new ArrayList<>();
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-//        for (Order order1 : order) {
-//            OrderRequest orderRequest = new OrderRequest();
-//            orderRequest.setStatus(order1.getStatus());
-//            //chuyển đổi sang dateTime;
-//            LocalDateTime createdDateTime = LocalDateTime.ofInstant(order1.getCreatedTime().toInstant(), ZoneId.systemDefault());
-//            String createdTimeFormatted = createdDateTime.format(formatter);
-//            orderRequest.setCreatedTime(createdTimeFormatted);
-//            listOrder.add(orderRequest);
-//        }
-        String jsonOrders;
-        try {
-            jsonOrders = objectMapper.writeValueAsString(order);
-
-        } catch (JsonProcessingException e) {
-            // Xử lý ngoại lệ khi chuyển đổi JSON
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-        return ResponseEntity.ok(jsonOrders);
+    public Page<Order> getAllStatus(@RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo) {
+        return orderService.findAllByStatus(pageNo);
     }
 
     //getOne
@@ -112,12 +89,22 @@ public class OrderController {
     }
 
     @GetMapping("/sortDescendingDate")
-    public List<Order> sortDescendingDate() {
-        return orderService.sortDescendingDate();
+    public Page<Order> sortDescendingDate(@RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo) {
+        return orderService.sortDescendingDate(pageNo);
     }
 
     @GetMapping("/sortUpDate")
-    public List<Order> sortUpDate() {
-        return orderService.sortUpDate();
+    public Page<Order> sortUpDate(@RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo) {
+        return orderService.sortUpDate(pageNo);
+    }
+
+    @GetMapping("/sortUpTime")
+    public Page<Order> sortUpTime(@RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo) {
+        return orderService.sortUpTime(pageNo);
+    }
+
+    @GetMapping("/sortDescendingTime")
+    public Page<Order> sortDescendingTime(@RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo) {
+        return orderService.sortDescendingTime(pageNo);
     }
 }

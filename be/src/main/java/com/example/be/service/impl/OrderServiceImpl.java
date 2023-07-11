@@ -5,10 +5,12 @@ import com.example.be.repository.OrderRepository;
 import com.example.be.request.OrderRequest;
 import com.example.be.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.List;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -16,8 +18,9 @@ public class OrderServiceImpl implements OrderService {
     private OrderRepository orderRepository;
 
     @Override
-    public List<Order> getAll() {
-        return orderRepository.findAll();
+    public Page<Order> getAll(Integer pageNo) {
+        Pageable pageable = PageRequest.of(pageNo, 10);
+        return orderRepository.findAll(pageable);
     }
 
     @Override
@@ -74,17 +77,32 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> findAllByStatus() {
-        return orderRepository.findOrderStatus();
+    public Page<Order> findAllByStatus(Integer pageNo) {
+        Pageable pageable = PageRequest.of(pageNo, 10);
+        return orderRepository.findOrderStatus(pageable);
     }
 
     @Override
-    public List<Order> sortDescendingDate() {
-        return orderRepository.sortDescending();
+    public Page<Order> sortDescendingDate(Integer pageNo) {
+        Pageable pageable = PageRequest.of(pageNo, 10);
+        return orderRepository.sortDescending(pageable);
     }
 
     @Override
-    public List<Order> sortUpDate() {
-        return orderRepository.sortUp();
+    public Page<Order> sortUpDate(Integer pageNo) {
+        Pageable pageable = PageRequest.of(pageNo, 10);
+        return orderRepository.sortUp(pageable);
+    }
+
+    @Override
+    public Page<Order> sortDescendingTime(Integer pageNo) {
+        Pageable pageable = PageRequest.of(pageNo, 10);
+        return orderRepository.sortDescendingTime(pageable);
+    }
+
+    @Override
+    public Page<Order> sortUpTime(Integer pageNo) {
+        Pageable pageable = PageRequest.of(pageNo, 10);
+        return orderRepository.sortUpTime(pageable);
     }
 }
