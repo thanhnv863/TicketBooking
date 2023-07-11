@@ -19,4 +19,10 @@ public interface OrderService {
     Order deleteSoft(Long id, OrderRequest orderRequest);
 
     List<Order> findAllByStatus();
+
+    List<Order> sortDescendingDate();
+
+    List<Order> sortUpDate();
+
+
 }

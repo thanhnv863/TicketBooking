@@ -5,6 +5,7 @@ spring:
     username: root
     password: 123456thanh@
     driver-class-name: com.mysql.cj.jdbc.Driver
+
   jpa:
     properties:
       hibernate:
@@ -13,3 +14,8 @@ spring:
         hbm2ddl:
           auto: none
     show-sql: true
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+
+    #    spring.jackson.serialization.FAIL_ON_EMPTY_BEANS=false
