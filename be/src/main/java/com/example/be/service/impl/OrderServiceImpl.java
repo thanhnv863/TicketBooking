@@ -4,6 +4,7 @@ import com.example.be.entity.Order;
 import com.example.be.repository.OrderRepository;
 import com.example.be.request.OrderRequest;
 import com.example.be.service.OrderService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -27,14 +28,14 @@ public class OrderServiceImpl implements OrderService {
     public Order getOne(Long id) {
         return orderRepository.findById(id).get();
     }
-
+    @Transactional
     @Override
     public Order add(OrderRequest orderRequest) {
         Date date = new Date();
         Order order = Order.builder().code(orderRequest.getCode()).totalAmount(orderRequest.getTotalAmount()).totalAfterReduction(orderRequest.getTotalAfterReduction()).status(orderRequest.getStatus()).createdBy(orderRequest.getCreatedBy()).createdTime(date).customer(orderRequest.getCustomer()).employee(orderRequest.getEmployee()).orderDate(date).timeOrder(date).build();
         return orderRepository.save(order);
     }
-
+    @Transactional
     @Override
     public Order update(Long id, OrderRequest orderRequest) {
         Date date = new Date();
