@@ -5,18 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class ChairRequest {
-    private Long idRoom;
-    private Long idChairType;
+public class TypeTicketRequest {
     private String name;
-    private Integer waitTime;
     private Integer status;
-    private String createdBy;
-    private String updatedBy;
 }

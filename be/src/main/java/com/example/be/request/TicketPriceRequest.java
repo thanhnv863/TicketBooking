@@ -5,18 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.math.BigDecimal;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class ChairRequest {
-    private Long idRoom;
+public class TicketPriceRequest {
+    private Long idTicketType;
     private Long idChairType;
-    private String name;
-    private Integer waitTime;
-    private Integer status;
-    private String createdBy;
-    private String updatedBy;
+    private BigDecimal price;
 }

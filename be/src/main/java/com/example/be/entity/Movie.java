@@ -49,18 +49,18 @@ public class Movie {
     @Column(name = "status")
     private Integer status;
 
-    @NotNull
-    @Column(name = "created_by")
-    private String createdBy;
-
-    @Column(name = "updated_by")
-    private String updatedBy;
-
-    @NotNull
-    @Column(name = "created_time")
-    private Date createdTime;
-
-    @Column(name = "updated_time")
-    private Date updatedTime;
+//    @NotNull
+//    @Column(name = "created_by")
+//    private String createdBy;
+//
+//    @Column(name = "updated_by")
+//    private String updatedBy;
+//
+//    @NotNull
+//    @Column(name = "created_time")
+//    private Date createdTime;
+//
+//    @Column(name = "updated_time")
+//    private Date updatedTime;
 
 }
