@@ -68,4 +68,6 @@ public class Order {
     @Column(name = "updated_time")
     private Date updatedTime;
 
+    @Column(name = "staus")
+    private Integer status;
 }
