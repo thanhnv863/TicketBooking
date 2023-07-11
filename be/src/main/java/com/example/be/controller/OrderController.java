@@ -110,4 +110,14 @@ public class OrderController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/sortDescendingDate")
+    public List<Order> sortDescendingDate() {
+        return orderService.sortDescendingDate();
+    }
+
+    @GetMapping("/sortUpDate")
+    public List<Order> sortUpDate() {
+        return orderService.sortUpDate();
+    }
 }

@@ -77,4 +77,14 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> findAllByStatus() {
         return orderRepository.findOrderStatus();
     }
+
+    @Override
+    public List<Order> sortDescendingDate() {
+        return orderRepository.sortDescending();
+    }
+
+    @Override
+    public List<Order> sortUpDate() {
+        return orderRepository.sortUp();
+    }
 }
