@@ -500,3 +500,27 @@ CREATE TABLE `ticket_booking`.`order_snack` (
     REFERENCES `ticket_booking`.`combo` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);  
+    
+    
+    
+						-- update: 11:50 PM 12/07/2023
+    USE ticket_booking;
+  CREATE TABLE `ticket_booking`.`order_time_line` (
+`id` BIGINT NOT NULL AUTO_INCREMENT,
+ `id_employee` BIGINT NOT NULL,
+  `id_order` BIGINT NOT NULL,
+  `created_time` DATETIME NOT NULL,
+  `type` VARCHAR(100) NULL,
+  `note` VARCHAR(255) NULL,
+  PRIMARY KEY (`id`),
+  INDEX `FK_empl_o_t_l` (`id_employee` ASC) VISIBLE,
+  CONSTRAINT `FK_e_or_time_line`
+    FOREIGN KEY (`id_employee`)
+    REFERENCES `ticket_booking`.`employee` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `FK_orders_or_time_line`
+    FOREIGN KEY (`id_order`)
+    REFERENCES `ticket_booking`.`orders` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);  
