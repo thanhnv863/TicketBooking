@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/ticket")
+@RestController("user_ticket")
+@RequestMapping("/user/ticket")
 public class TicketController {
     @Autowired
     private TicketService ticketService;

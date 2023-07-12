@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/order")
+@RestController("user_order")
+@RequestMapping("/user/order")
 public class OrderController {
     @Autowired
     private OrderServiceImpl orderService;

@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
-@RestController
-@RequestMapping("/employee")
+@RestController("user_empl")
+@RequestMapping("/user/employee")
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;

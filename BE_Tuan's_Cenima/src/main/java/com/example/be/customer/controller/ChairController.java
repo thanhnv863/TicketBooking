@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/chair")
+@RestController("user_chair")
+@RequestMapping("/user/chair")
 public class ChairController {
     @Autowired
     private ChairService chairService;

@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.Optional;
 
-@RestController
-@RequestMapping("/snack")
+@RestController("user_snack")
+@RequestMapping("/user/snack")
 public class SnackController {
     @Autowired
     private SnackService snackService;

@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/chair-type")
+@RestController("user_chair_type")
+@RequestMapping("/user/chair-type")
 public class ChairTypeController {
     @Autowired
     private ChairTypeService chairTypeService;

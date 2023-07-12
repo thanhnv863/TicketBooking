@@ -9,7 +9,7 @@ import com.example.be.employee.message.response.TicketResponse;
 
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
-    @Query("SELECT NEW com.example.be.response.TicketResponse" +
+    @Query("SELECT NEW com.example.be.employee.message.response.TicketResponse" +
             "(ot.price, ot.ticket.code, ot.order.customer.code," +
             "ot.order.employee.code, ot.order.code," +
             "ot.ticket.chair.name, ot.ticket.chair.chairType.name)" +
