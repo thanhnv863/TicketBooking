@@ -22,6 +22,7 @@ app.config(function ($routeProvider, $locationProvider) {
     })
     .when("/main-actor", {
       templateUrl: "../src/pages/films/main-actor.html",
+      controller: actorController,
     })
     .when("/directors", {
       templateUrl: "../src/pages/films/directors.html",
@@ -66,4 +67,3 @@ app.config(function ($routeProvider, $locationProvider) {
     })
     .otherwise("/sell");
 });
-
