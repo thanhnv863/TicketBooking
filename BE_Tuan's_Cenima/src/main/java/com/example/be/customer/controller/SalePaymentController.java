@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/sale-payment")
+@RestController("user_sale-payment")
+@RequestMapping("/user/sale-payment")
 public class SalePaymentController {
     @Autowired
     private SalePaymentServiceImpl salePaymentService;

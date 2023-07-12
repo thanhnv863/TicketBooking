@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/order-ticket")
+@RestController("user_order-ticket")
+@RequestMapping("/user/order-ticket")
 public class OrderTicketController {
     @Autowired
     private OrderTicketServiceImpl orderTicketService;

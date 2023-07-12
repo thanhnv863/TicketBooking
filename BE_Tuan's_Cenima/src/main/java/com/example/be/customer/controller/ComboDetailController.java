@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 
-@RestController
-@RequestMapping("combo-detail")
+@RestController("user_combo_detail")
+@RequestMapping("/user/combo-detail")
 public class ComboDetailController {
     @Autowired
     private ComboDetailService comboDetailService;
