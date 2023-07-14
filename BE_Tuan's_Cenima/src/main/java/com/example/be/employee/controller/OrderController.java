@@ -1,7 +1,7 @@
 package com.example.be.employee.controller;
 
-import com.example.be.entity.Order;
 import com.example.be.employee.message.request.OrderRequest;
+import com.example.be.entity.Order;
 import com.example.be.service.impl.OrderServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.Date;
+import java.util.List;
+
 @RestController
 @RequestMapping("/order")
 public class OrderController {
@@ -31,7 +34,10 @@ public class OrderController {
     public Page<Order> getAll(@RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo) {
         return orderService.getAll(pageNo);
     }
-
+    @GetMapping("/get-all-list")
+    public List<Order> getAllList() {
+        return orderService.getAllList();
+    }
     //findAllStatus
     @GetMapping("/get-all-status")
     public Page<Order> getAllStatus(@RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo) {
@@ -107,4 +113,16 @@ public class OrderController {
     public Page<Order> sortDescendingTime(@RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo) {
         return orderService.sortDescendingTime(pageNo);
     }
+
+    @GetMapping("/searchDate")
+    public Page<Order> searchDate(@RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo,
+                                  @RequestParam("dateFirst") String dateFirst,
+                                  @RequestParam("dateLast") String dateLast) {
+        if (dateFirst == null || dateLast == null) {
+            // Xử lý trường hợp giá trị null
+            // ...
+        }
+        return orderService.searchDate(Date.valueOf(dateFirst), Date.valueOf(dateLast), pageNo);
+    }
+
 }
