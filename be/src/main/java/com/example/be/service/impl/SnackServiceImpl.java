@@ -25,7 +25,7 @@ public class SnackServiceImpl implements SnackService {
     @Override
     public List<Snacks> findAll() {
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
-        return repo.findAll(sort);
+        return repo.findByStatus(0,sort);
     }
 
     @Override

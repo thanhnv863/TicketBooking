@@ -6,6 +6,7 @@ import com.example.be.request.EmployeeRequest;
 import com.example.be.service.EmployeeService;
 import com.example.be.util.DataUltil;
 import com.example.be.util.DateTimeUtil;
+import com.example.be.util.ZenCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -22,11 +23,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<Employee> findAll() {
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
-        return repo.findAll(sort);
+        return repo.findByStatus(0,sort);
     }
 
     @Override
     public HashMap<String, Object> add(EmployeeRequest employeeRequest) {
+        employeeRequest.setCode(new ZenCode().zenMa("NV",repo.findAll()));
         employeeRequest.setStatus(0);
         employeeRequest.setCreateBy("NV1");
         employeeRequest.setCreateTime(DateTimeUtil.getTime());
