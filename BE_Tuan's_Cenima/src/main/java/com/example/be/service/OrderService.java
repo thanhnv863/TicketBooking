@@ -1,8 +1,11 @@
 package com.example.be.service;
 
-import com.example.be.entity.Order;
 import com.example.be.employee.message.request.OrderRequest;
+import com.example.be.entity.Order;
 import org.springframework.data.domain.Page;
+
+import java.sql.Date;
+import java.util.List;
 
 public interface OrderService {
     Page<Order> getAll(Integer pageNo);
@@ -26,5 +29,9 @@ public interface OrderService {
     Page<Order> sortDescendingTime(Integer pageNo);
 
     Page<Order> sortUpTime(Integer pageNo);
+
+    Page<Order> searchDate(Date dateFirst, Date dateLast, Integer pageNo);
+
+    List<Order> getAllList();
 
 }
