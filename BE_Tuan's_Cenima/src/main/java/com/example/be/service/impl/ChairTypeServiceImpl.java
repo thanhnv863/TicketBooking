@@ -25,7 +25,7 @@ public class ChairTypeServiceImpl implements ChairTypeService {
     private ChairTypeRepository chairTypeRepository;
 
     @Override
-    public void save(ChairTypeRequest chairTypeRequest) {
+    public ChairType save(ChairTypeRequest chairTypeRequest) {
         Date date = new Date();
         ChairType chairType = ChairType.builder()
                 .status(chairTypeRequest.getStatus())
@@ -34,7 +34,7 @@ public class ChairTypeServiceImpl implements ChairTypeService {
                 .createdTime(date)
                 .build();
         System.out.println(chairType.getCreatedTime());
-        chairTypeRepository.save(chairType);
+        return chairTypeRepository.save(chairType);
     }
 
     @Override

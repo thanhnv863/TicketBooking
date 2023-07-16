@@ -6,7 +6,7 @@ import com.example.be.employee.message.request.ChairTypeRequest;
 import java.util.List;
 
 public interface ChairTypeService {
-    void save(ChairTypeRequest chairTypeRequest);
+    ChairType save(ChairTypeRequest chairTypeRequest);
 
     List<ChairType> getAll();
 

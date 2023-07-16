@@ -15,4 +15,6 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
             "ot.ticket.chair.name, ot.ticket.chair.chairType.name)" +
             "   FROM OrderTicket ot WHERE ot.ticket.id = :idTicket")
     TicketResponse getTicket(@Param("idTicket") Long idTicket);
+
+    Ticket getTicketByCode(String code);
 }
