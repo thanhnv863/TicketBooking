@@ -12,8 +12,9 @@ import java.util.Date;
 //@AllArgsConstructor
 @Getter
 @Setter
-@Builder
+//@Builder
 public class TicketResponse {
+    private Long id;
     private BigDecimal price;
     private String code;
     private String customerCode;
@@ -23,8 +24,13 @@ public class TicketResponse {
     private String chairTypeName;
     private Integer status;
     private Date createdTime;
+    private String room;
+    private Date time;
+    private String movie;
 
-    public TicketResponse(BigDecimal price, String code, String customerCode, String employeeCode, String ordersCode, String chairName, String chairTypeName, Integer status, Date createdTime) {
+    public TicketResponse(BigDecimal price, String code, String customerCode, String employeeCode,
+                          String ordersCode, String chairName, String chairTypeName,
+                          Integer status, Date createdTime, Long id, String room, Date time, String movie) {
         this.price = price;
         this.code = code;
         this.customerCode = customerCode;
@@ -34,5 +40,9 @@ public class TicketResponse {
         this.chairTypeName = chairTypeName;
         this.status = status;
         this.createdTime = createdTime;
+        this.id = id;
+        this.room = room;
+        this.time = time;
+        this.movie = movie;
     }
 }
