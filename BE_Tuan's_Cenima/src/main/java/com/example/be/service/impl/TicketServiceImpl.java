@@ -38,6 +38,9 @@ public class TicketServiceImpl implements TicketService {
     private ChairRepository chairRepository;
 
     //them xuat chieu nua
+    //1 - printed
+    //2 - unprinted
+//ban off => truyen vao status 1, dat on => truyen vao status 2 khi saves
 
     @Override
     public TicketResponse save(TicketRequest ticketRequest) {
@@ -52,7 +55,7 @@ public class TicketServiceImpl implements TicketService {
                 .createdBy("NV001")
                 .createdTime(new Date())
                 .ticketPrice(ticketPrice)
-                .status(1)
+                .status(ticketRequest.getStatus())
                 .typeTicket(typeTicket)
                 .showTime(showTime)
                 .code(ticketRequest.getCode())
