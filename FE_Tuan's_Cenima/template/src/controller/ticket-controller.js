@@ -11,7 +11,20 @@ window.ticketController = function ($scope, $http, $rootScope) {
       .then(function (response) {
         $scope.tickets = response.data.content; // Lưu trữ danh sách vé
         $rootScope.maxPage = response.data.totalPages; // Tổng số trang
-        console.log("huuu: " + $rootScope.maxPage);
+        $scope.getTotalPages(); // Gọi hàm getTotalPages() sau khi cập nhật giá trị maxPage
+      });
+  };
+  $scope.getTicketsByStatus = function (pageNo, status) {
+    $http
+      .get(
+        "http://localhost:8080/ticket/get-ticket-by-status?pageNo=" +
+          pageNo +
+          "&status=" +
+          status
+      )
+      .then(function (response) {
+        $scope.tickets = response.data.content; // Lưu trữ danh sách vé
+        $rootScope.maxPage = response.data.totalPages; // Tổng số trang
         $scope.getTotalPages(); // Gọi hàm getTotalPages() sau khi cập nhật giá trị maxPage
       });
   };
@@ -22,12 +35,24 @@ window.ticketController = function ($scope, $http, $rootScope) {
   $scope.goToPage = function (page) {
     if (page >= 0 && page <= $scope.maxPage) {
       $scope.currentPage = page;
-      $scope.getTickets(page);
+      if (parseInt($scope.cbbStatusTicketFilter) === 3) {
+        $scope.getTickets(page);
+      }
+      // $scope.getTickets(page);
+      $scope.getTicketsByStatus(page, $scope.cbbStatusTicketFilter);
     }
   };
-  console.log("huuu: " + $scope.pages);
-  console.log("huuu: " + $rootScope.maxPage);
 
   $scope.getTotalPages();
   $scope.getTickets(0);
+  $scope.filterTicketByStatus = function (status) {
+    //cbb chojn all => value = 3 => getAll, chon printed => 1, unprinted => 2, khac => 4 => tam thoi cu set la get all tai chua nghi ra
+    $scope.currentPage = 0;
+    if (parseInt(status) === 3) {
+      console.log("ua alo");
+      $scope.getTickets(0);
+    }
+    $scope.getTicketsByStatus(0, status);
+    console.log("Selected status:", status);
+  };
 };

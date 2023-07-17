@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/ticket")
 public class TicketController {
@@ -36,8 +34,27 @@ public class TicketController {
         return ticketService.getTicket(id);
     }
 
-//    @GetMapping("/get-ticket-by-code/{codeTicket}")
-//    public TicketResponse getTicketByCode(@PathVariable("codeTicket") String codeTicket) {
-//        return
-//    }
+    @GetMapping("/get-ticket-by-status")
+    public Page<TicketResponse> getTicketByStatus(
+            @RequestParam("status") Integer status,
+            @RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo
+    ) {
+        return ticketService.getTicketByStatus(status, pageNo);
+    }
+
+    @GetMapping("/get-ticket-by-id-orders")
+    public Page<TicketResponse> getTicketByIdOrders(
+            @RequestParam("idOrders") Long idOrders,
+            @RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo
+    ) {
+        return ticketService.getTicketByOrdersId(idOrders, pageNo);
+    }
+
+    @GetMapping("/get-ticket-by-code-customer")
+    public Page<TicketResponse> getTicketByCustomerCode(
+            @RequestParam("customerCode") String customerCode,
+            @RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo
+    ) {
+        return ticketService.getTicketByCodeCustomer(customerCode, pageNo);
+    }
 }

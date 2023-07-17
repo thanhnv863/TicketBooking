@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -71,13 +72,33 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public Page<TicketResponse> getAll(Integer pageNo) {
-        Pageable pageable = PageRequest.of(pageNo, 1);
+        Sort sort = Sort.by(Sort.Direction.DESC, "createdTime"); // Sắp xếp theo trường "createdTime"
+        Pageable pageable = PageRequest.of(pageNo, 3, sort);
         return ticketRepository.findAll(pageable).map(ticket -> ticketRepository.getTicket(ticket.getId()));
     }
 
     @Override
     public TicketResponse getTicket(Long idTicket) {
         return ticketRepository.getTicket(idTicket);
+    }
+
+    @Override
+    public Page<TicketResponse> getTicketByStatus(Integer status, Integer pageNo) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "createdTime"); // Sắp xếp theo trường "createdTime"
+        Pageable pageable = PageRequest.of(pageNo, 2, sort);
+        return ticketRepository.getTicketByStatus(status, pageable).map(ticket -> ticketRepository.getTicket(ticket.getId()));
+    }
+
+    @Override
+    public Page<TicketResponse> getTicketByOrdersId(Long IdOrders, Integer pageNo) {
+        Pageable pageable = PageRequest.of(pageNo, 2);
+        return ticketRepository.getTicketByOrdersId(IdOrders, pageable);
+    }
+
+    @Override
+    public Page<TicketResponse> getTicketByCodeCustomer(String customerCode, Integer pageNo) {
+        Pageable pageable = PageRequest.of(pageNo, 2);
+        return ticketRepository.getTicketByCodeCustomer(customerCode, pageable);
     }
 
 }
