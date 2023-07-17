@@ -1,4 +1,4 @@
-var app = angular.module("myApp", ["ngRoute"]);
+var app = angular.module("myApp", ["ngRoute", "ngWebSocket"]);
 app.config(function ($routeProvider, $locationProvider) {
   $locationProvider.hashPrefix("");
   $routeProvider
@@ -35,9 +35,11 @@ app.config(function ($routeProvider, $locationProvider) {
     })
     .when("/ticket", {
       templateUrl: "../src/pages/products/ticket.html",
+      controller: ticketController,
     })
     .when("/chair", {
       templateUrl: "../src/pages/products/chair.html",
+      controller: chairController,
     })
     .when("/room", {
       templateUrl: "../src/pages/products/room.html",

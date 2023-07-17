@@ -15,6 +15,9 @@ import com.example.be.employee.message.request.TicketRequest;
 import com.example.be.employee.message.response.TicketResponse;
 import com.example.be.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -37,7 +40,7 @@ public class TicketServiceImpl implements TicketService {
     //them xuat chieu nua
 
     @Override
-    public void save(TicketRequest ticketRequest) {
+    public TicketResponse save(TicketRequest ticketRequest) {
         TypeTicket typeTicket = typeTicketRepository.findById(ticketRequest.getIdTypeTickket()).get();
         Chair chair = chairRepository.findById(ticketRequest.getIdChair()).get();
         ChairType chairType = chairTypeRepository.findById(chair.getChairType().getId()).get();
@@ -56,15 +59,22 @@ public class TicketServiceImpl implements TicketService {
                 .ticketPrice(ticketPrice)
                 .build();
         ticketRepository.save(ticket);
+        Ticket newTicket = ticketRepository.getTicketByCode(ticketRequest.getCode());
+        TicketResponse ticketResponse = ticketRepository.getTicket(newTicket.getId());
+//        System.out.println("hus");
+//        System.out.println(ticketResponse.);
+        return ticketResponse;
     }
 
     @Override
-    public List<Ticket> getAll() {
-        return ticketRepository.findAll();
+    public Page<TicketResponse> getAll(Integer pageNo) {
+        Pageable pageable = PageRequest.of(pageNo, 1);
+        return ticketRepository.findAll(pageable).map(ticket -> ticketRepository.getTicket(ticket.getId()));
     }
 
     @Override
     public TicketResponse getTicket(Long idTicket) {
         return ticketRepository.getTicket(idTicket);
     }
+
 }

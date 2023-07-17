@@ -5,11 +5,13 @@ import com.example.be.employee.message.request.TicketRequest;
 import com.example.be.employee.message.response.TicketResponse;
 import com.example.be.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -27,8 +29,8 @@ public class TicketController {
     }
 
     @GetMapping("/get-all")
-    public List<Ticket> getAll() {
-        return ticketService.getAll();
+    public List<TicketResponse> getAll(@RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo) {
+        return ticketService.getAll(pageNo).getContent().stream().toList();
     }
 
     @GetMapping("/get-ticket/{id}")
