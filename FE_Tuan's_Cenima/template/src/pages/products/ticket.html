@@ -1,7 +1,7 @@
 <div class="ticket-style">
   <h2>Ticket</h2>
   <section class="page-content">
-    <div class="row">
+    <!-- <div class="row">
       <div class="col-7">
         <section class="search-and-user">
           <form>
@@ -88,12 +88,11 @@
         </form>
       </div>
       <div class="col-3">
-        <!-- HTML !-->
         <button class="button-74" role="button">+ADD MOVIE</button>
       </div>
-    </div>
+    </div> -->
 
-    <section class="grid">
+    <!-- <section class="grid">
       <article>
         <div class="container">
           <div class="row">
@@ -263,11 +262,17 @@
           </div>
         </div>
       </article>
-    </section>
-
+    </section> -->
+    <div class="col-md-4">
+      <label for="inputState" class="form-label">State</label>
+      <select id="inputState" class="form-select">
+        <option selected>Choose...</option>
+        <option>...</option>
+      </select>
+    </div>
     <!-- table ticket -->
     <div class="table_table">
-      <h4>Ticket</h4>
+      <!-- <h4>Ticket</h4> -->
       <div class="table-responsive table-rounded">
         <table
           class="table table-borderless table-striped table-hover table-full-width bg-white"
@@ -281,6 +286,9 @@
               <th class="text-center">Ma ve</th>
               <th class="text-center">Loai ghe - Ghe</th>
               <th class="text-center">Gia</th>
+              <th class="text-center">Ngay tao</th>
+              <th class="text-center">Trang thai</th>
+              <th class="text-center"></th>
             </tr>
           </thead>
           <tbody>
@@ -294,6 +302,13 @@
                 {{ticket.chairTypeName}} - {{ticket.chairName}}
               </th>
               <th class="text-center">{{ticket.price}}</th>
+              <th class="text-center">{{ticket.createdTime}}</th>
+              <th class="text-center">
+                <span ng-if="ticket.status == 1">printed</span>
+                <span ng-if="ticket.status == 2">unprinted</span>
+                <span ng-if="ticket.status == 3">ko xác định</span>
+              </th>
+
               <td class="text-center">
                 <a style="color: aliceblue"><i class="mdi mdi-eye"></i></a>
                 <a style="color: aquamarine"

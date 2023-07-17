@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 @NoArgsConstructor
 //@AllArgsConstructor
@@ -20,8 +21,10 @@ public class TicketResponse {
     private String ordersCode;
     private String chairName;
     private String chairTypeName;
+    private Integer status;
+    private Date createdTime;
 
-    public TicketResponse(BigDecimal price, String code, String customerCode, String employeeCode, String ordersCode, String chairName, String chairTypeName) {
+    public TicketResponse(BigDecimal price, String code, String customerCode, String employeeCode, String ordersCode, String chairName, String chairTypeName, Integer status, Date createdTime) {
         this.price = price;
         this.code = code;
         this.customerCode = customerCode;
@@ -29,5 +32,7 @@ public class TicketResponse {
         this.ordersCode = ordersCode;
         this.chairName = chairName;
         this.chairTypeName = chairTypeName;
+        this.status = status;
+        this.createdTime = createdTime;
     }
 }
