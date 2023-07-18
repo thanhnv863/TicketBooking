@@ -11,6 +11,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class OrderSnackServiceImpl implements OrderSnackService {
     @Autowired
@@ -61,5 +63,10 @@ public class OrderSnackServiceImpl implements OrderSnackService {
             orderSnackRepository.deleteById(id);
             return true;
         }
+    }
+
+    @Override
+    public List<OrderSnack> listOrderSnackByIdOrder(Long id) {
+        return orderSnackRepository.listOrderSnackByIdOrder(id);
     }
 }

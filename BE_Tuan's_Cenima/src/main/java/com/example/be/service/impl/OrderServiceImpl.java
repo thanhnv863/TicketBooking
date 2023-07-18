@@ -43,7 +43,7 @@ public class OrderServiceImpl implements OrderService {
         Order orderAdd = orderRepository.save(order);
         OrderTimeLine orderTimeLine = OrderTimeLine.builder()
                 .createdTime(date)
-                .type((orderAdd.getStatus() == 1 ? "Tạo Đơn Hàng" : ""))
+                .type("Created")
                 .note("Nhân Viên Tạo Đơn Cho Khách")
                 .order(orderAdd)
                 .employee(orderAdd.getEmployee())
@@ -69,7 +69,7 @@ public class OrderServiceImpl implements OrderService {
         Order orderUpdate = orderRepository.save(order);
         OrderTimeLine orderTimeLine = OrderTimeLine.builder()
                 .createdTime(date)
-                .type((orderUpdate.getStatus() == 2 ? "Update Đơn Hàng" : ""))
+                .type((orderUpdate.getStatus() == 2 ? "Updated" : ""))
                 .note("Update update")
                 .order(orderUpdate)
                 .employee(orderUpdate.getEmployee())

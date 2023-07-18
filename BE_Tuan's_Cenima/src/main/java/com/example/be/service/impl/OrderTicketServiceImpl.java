@@ -1,8 +1,8 @@
 package com.example.be.service.impl;
 
+import com.example.be.employee.message.request.OrderTicketRequest;
 import com.example.be.entity.OrderTicket;
 import com.example.be.repository.OrderTicketRepository;
-import com.example.be.employee.message.request.OrderTicketRequest;
 import com.example.be.service.OrderTicketService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class OrderTicketServiceImpl implements OrderTicketService {
@@ -26,6 +28,7 @@ public class OrderTicketServiceImpl implements OrderTicketService {
     public OrderTicket getOne(Long id) {
         return orderTicketRepository.findById(id).get();
     }
+
     @Transactional
     @Override
     public OrderTicket add(OrderTicketRequest orderTicketRequest) {
@@ -38,6 +41,7 @@ public class OrderTicketServiceImpl implements OrderTicketService {
                 .build();
         return orderTicketRepository.save(orderTicket);
     }
+
     @Transactional
     @Override
     public OrderTicket update(Long id, OrderTicketRequest orderTicketRequest) {
@@ -58,5 +62,10 @@ public class OrderTicketServiceImpl implements OrderTicketService {
             orderTicketRepository.deleteById(id);
             return true;
         }
+    }
+
+    @Override
+    public List<OrderTicket> listOrderTicketByIdOrder(Long id) {
+        return orderTicketRepository.listOrderTicketByIdOrder(id);
     }
 }

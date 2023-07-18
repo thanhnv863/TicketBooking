@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/order-snack")
 public class OrderSnackController {
@@ -52,5 +54,10 @@ public class OrderSnackController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/list-order-snack/{id}")
+    public List<OrderSnack> getListOrderSnackByIdOrder(@PathVariable("id") String id) {
+        return orderSnackService.listOrderSnackByIdOrder(Long.valueOf(id));
     }
 }
