@@ -524,3 +524,7 @@ CREATE TABLE `ticket_booking`.`order_snack` (
     REFERENCES `ticket_booking`.`orders` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);  
+-- update 18/7: chay them dong nay nhe
+USE ticket_booking;
+ALTER TABLE type_ticket
+ADD note VARCHAR(255);
