@@ -22,4 +22,9 @@ public class OrderTimeLineServiceImpl implements OrderTimeLineService {
     public List<OrderTimeLine> findAllTime() {
         return orderTimeLineRepository.getAllTime();
     }
+
+    @Override
+    public List<OrderTimeLine> getOneIdOrder(Long id) {
+        return orderTimeLineRepository.getOneIdOrder(id);
+    }
 }

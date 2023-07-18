@@ -9,4 +9,6 @@ public interface OrderTimeLineService {
     List<OrderTimeLine> getAll();
 
     List<OrderTimeLine> findAllTime();
+
+    List<OrderTimeLine> getOneIdOrder(Long id);
 }

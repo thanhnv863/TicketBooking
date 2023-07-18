@@ -4,6 +4,7 @@ import com.example.be.entity.OrderTimeLine;
 import com.example.be.service.impl.OrderTimeLineServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,5 +19,10 @@ public class OrderTimeLineController {
     @GetMapping("/get-all")
     public List<OrderTimeLine> getAll() {
         return orderTimeLineService.getAll();
+    }
+
+    @GetMapping("/get-one/{id}")
+    public List<OrderTimeLine> getOneMaOrder(@PathVariable("id") String id) {
+        return orderTimeLineService.getOneIdOrder(Long.valueOf(id));
     }
 }
