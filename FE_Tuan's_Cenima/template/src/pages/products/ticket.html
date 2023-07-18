@@ -1,5 +1,20 @@
 <div class="ticket-style">
   <h2>Ticket</h2>
+  <div class="col-7">
+    <section class="search-and-user">
+      <form>
+        <input
+          type="search"
+          ng-model="inputSearch"
+          placeholder="Search Pages..."
+          style="font-size: 15px"
+        />
+        <button type="submit" aria-label="submit form">
+          <span class="mdi mdi-magnify"></span>
+        </button>
+      </form>
+    </section>
+  </div>
   <section class="page-content">
     <div class="col-md-3">
       <label for="cbbTrangThaiFilter" class="form-label"
@@ -33,7 +48,10 @@
               <th class="text-center">Khach hang</th>
               <th class="text-center">Nhan vien</th>
               <th class="text-center">Ma ve</th>
+              <th class="text-center">Phòng</th>
               <th class="text-center">Loai ghe - Ghe</th>
+              <th class="text-center">Phim</th>
+              <th class="text-center">Giờ chiếu</th>
               <th class="text-center">Gia</th>
               <th class="text-center">Ngay tao</th>
               <th class="text-center">Trang thai</th>
@@ -44,26 +62,53 @@
             <tr ng-repeat="ticket in tickets">
               <td class="text-center">{{$index + 1}}</td>
               <td class="text-center">{{ticket.ordersCode}}</td>
-              <th class="text-center">{{ticket.customerCode}}</th>
-              <th class="text-center">{{ticket.employeeCode}}</th>
-              <th class="text-center">{{ticket.code}}</th>
-              <th class="text-center">
+              <td class="text-center">{{ticket.customerCode}}</td>
+              <td class="text-center">{{ticket.employeeCode}}</td>
+              <td class="text-center">{{ticket.code}}</td>
+              <td class="text-center">{{ticket.room}}</td>
+              <td class="text-center">
                 {{ticket.chairTypeName}} - {{ticket.chairName}}
-              </th>
-              <th class="text-center">{{ticket.price}}</th>
-              <th class="text-center">{{ticket.createdTime}}</th>
-              <th class="text-center">
+              </td>
+              <td class="text-center">{{ticket.movie}}</td>
+              <td class="text-center">{{ticket.time}}</td>
+              <td class="text-center">{{ticket.price}}</td>
+              <td class="text-center">{{ticket.createdTime}}</td>
+              <td class="text-center">
                 <span ng-if="ticket.status == 1">printed</span>
-                <span ng-if="ticket.status == 2">unprinted</span>
+                <!-- <span ng-if="ticket.status == 2"
+                  ><button
+                    type="button"
+                    class="btn btn-danger"
+                    ng-click="updateStatusTicket(ticket.id)"
+                  >
+                    {{ticket.id}}
+                  </button></span
+                > -->
+                <span ng-if="ticket.status == 2">
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    ng-click="confirmUpdate(ticket.id)"
+                    style="border-radius: 40px; width: 120px; height: 32px"
+                  >
+                    unprinted
+                  </button>
+                </span>
+
                 <span ng-if="ticket.status == 3">ko xác định</span>
-              </th>
+              </td>
 
               <td class="text-center">
-                <a style="color: aliceblue"><i class="mdi mdi-eye"></i></a>
+                <a ng-click="showDialog(ticket.id)" style="color: red"
+                  >Xem
+                  <!-- <i class="mdi mdi-eye"></i> -->
+                  <!-- <button ng-click="showDialog()">Hiển thị hộp thoại</button> -->
+                </a>
+                <!-- <a style="color: aliceblue"><i class="mdi mdi-eye"></i></a>
                 <a style="color: aquamarine"
                   ><i class="mdi mdi-square-edit-outline"></i
                 ></a>
-                <a style="color: red"><i class="mdi mdi-delete"></i></a>
+                <a style="color: red"><i class="mdi mdi-delete"></i></a> -->
               </td>
             </tr>
           </tbody>
@@ -83,16 +128,147 @@
         </li>
       </ul>
     </nav>
+    <br /><br /><br />
+    <!-- type ticket & ticket price -->
+    <div class="row">
+      <div class="col-6">
+        <div class="type-ticket">
+          <h2>Type Ticket</h2>
+          <section class="page-content">
+            <div class="col-md-3">
+              <label for="cbbTrangThaiFilter" class="form-label"
+                ><b>Trạng thái:</b></label
+              >
+              <select
+                ng-model="cbbStatusTicketFilter"
+                id="cbbTrangThaiFilter"
+                class="form-select"
+                ng-change="filterTicketByStatus(cbbStatusTicketFilter)"
+                ng-init="cbbStatusTicketFilter = '3'"
+              >
+                <option value="1">Active</option>
+                <option value="0">Unactive</option>
+                <option value="3">All</option>
+              </select>
+              <br />
+            </div>
+            <!-- table ticket -->
+            <div class="table_table">
+              <!-- <h4>Ticket</h4> -->
+              <div class="table-responsive table-rounded">
+                <table
+                  class="table table-borderless table-striped table-hover table-full-width bg-white"
+                >
+                  <thead>
+                    <tr>
+                      <th class="text-center">STT</th>
+                      <th class="text-center">Name</th>
+                      <th class="text-center">Mo ta</th>
+                      <th class="text-center">Trang thai</th>
+                      <th class="text-center">Nguoi tao</th>
+                      <th class="text-center"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="typeTicket in listTypeTicket">
+                      <td class="text-center">{{$index + 1}}</td>
+                      <td class="text-center">{{typeTicket.name}}</td>
+                      <td class="text-center">{{typeTicket.note}}</td>
+                      <td class="text-center">
+                        <span ng-if="typeTicket.status == 1">Active</span>
+                        <span ng-if="typeTicket.status == 0">Un Active </span>
+                      </td>
+                      <td class="text-center">{{typeTicket.createdBy}}</td>
+
+                      <td class="text-center">
+                        <a style="color: red"
+                          >Xem<i class="mdi mdi-eye"></i>
+                        </a>
+                        <!-- <a style="color: aquamarine"
+                          ><i class="mdi mdi-square-edit-outline"></i
+                        ></a>
+                        <a style="color: red"><i class="mdi mdi-delete"></i></a> -->
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="d-grid gap-2 col-12 mx-auto">
+                  <button class="btn btn-secondary" type="button">Them</button>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="ticket-price">
+          <h2>Ticket Price</h2>
+          <section class="page-content">
+            <!-- table ticket -->
+            <div class="table_table">
+              <!-- <h4>Ticket</h4> -->
+              <div class="table-responsive table-rounded">
+                <table
+                  class="table table-borderless table-striped table-hover table-full-width bg-white"
+                >
+                  <thead>
+                    <tr>
+                      <th class="text-center">STT</th>
+                      <th class="text-center">Loai ghe</th>
+                      <th class="text-center">Loai ve</th>
+                      <th class="text-center">Gia tien</th>
+                      <th class="text-center">Nguoi tao</th>
+                      <th class="text-center"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="ticketPrice in listTicketPrice">
+                      <td class="text-center">{{$index + 1}}</td>
+                      <td class="text-center">
+                        {{ticketPrice.typeTicket.name}}
+                      </td>
+                      <td class="text-center">
+                        {{ticketPrice.chairType.name}}
+                      </td>
+                      <td class="text-center">{{ticketPrice.price}}</td>
+                      <td class="text-center">{{ticketPrice.createdBy}}</td>
+
+                      <td class="text-center">
+                        <a style="color: aliceblue"
+                          ><i class="mdi mdi-eye"></i
+                        ></a>
+                        <a style="color: aquamarine"
+                          ><i class="mdi mdi-square-edit-outline"></i
+                        ></a>
+                        <a style="color: red"><i class="mdi mdi-delete"></i></a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="d-grid gap-2 col-12 mx-auto">
+                  <button class="btn btn-secondary" type="button">Them</button>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
   </section>
+  <!-- detail ticket -->
+  <div id="dialog-overlay" style="display: none">
+    <div id="dialog" class="dialog-detail-ticket">
+      <!-- Nội dung của hộp thoại -->
+      <h2 class="text-center">TUAN'S CINEMA</h2>
+      <p>+--------------Thong tin ve--------------+</p>
+      <br />
+
+      <div class="row">
+        <p class="col-6">Nhan vien: {{ticket.createdBy}}</p>
+      </div>
+      Thoi gian:
+      <button ng-click="hideDialog()">Đóng</button>
+    </div>
+  </div>
+  <!-- detail ticket -->
 </div>
-<!--  <label for="inputState" class="form-label">Loai</label>
-      <select ng-model="form_SV.loaiSV" id="inputState" class="form-select">
-        <option value="Loai 1" ng-checked="form_SV.loaiSV == 'Loai 1'">
-          Loai 1
-        </option>
-        <option value="Loai 2" ng-checked="form_SV.loaiSV == 'Loai 2'">
-          Loai 2
-        </option>
-        <option value="Loai 3" ng-checked="form_SV.loaiSV == 'Loai 3'">
-          Loai 3
-        </option> -->

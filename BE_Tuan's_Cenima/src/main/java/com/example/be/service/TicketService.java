@@ -2,9 +2,8 @@ package com.example.be.service;
 
 import com.example.be.employee.message.request.TicketRequest;
 import com.example.be.employee.message.response.TicketResponse;
+import com.example.be.entity.Ticket;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.query.Param;
 
 public interface TicketService {
     TicketResponse save(TicketRequest ticketRequest);
@@ -19,5 +18,14 @@ public interface TicketService {
     Page<TicketResponse> getTicketByOrdersId(Long IdOrders, Integer pageNo);
 
     Page<TicketResponse> getTicketByCodeCustomer(String customerCode, Integer pageNo);
+
+    Page<TicketResponse> searchTicket(
+            String inputSearch,
+            Integer pageNo
+    );
+
+    Ticket getOne(Long id);
+
+    TicketResponse updateStatusTicket(Long idTicket, Integer status);
 
 }

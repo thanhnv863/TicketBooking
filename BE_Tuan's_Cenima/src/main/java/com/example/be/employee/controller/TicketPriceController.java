@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/ticket-price")
 public class TicketPriceController {
@@ -24,6 +26,11 @@ public class TicketPriceController {
     @GetMapping("/get-all")
     public Page<TicketPriceResponse> getAll(@RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo) {
         return ticketPriceService.getAll(pageNo);
+    }
+
+    @GetMapping("/get-all-entity")
+    public List<TicketPrice> getAllEntity() {
+        return ticketPriceService.getAllEntity();
     }
 
     @PostMapping("/save")
