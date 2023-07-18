@@ -5,6 +5,8 @@ import com.example.be.employee.message.request.TicketPriceRequest;
 import com.example.be.employee.message.response.TicketPriceResponse;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
+
 public interface TicketPriceService {
     Page<TicketPriceResponse> getAll(Integer pageNo);
 
@@ -13,5 +15,7 @@ public interface TicketPriceService {
     void update(Long id, TicketPriceRequest ticketPriceRequest);
 
     TicketPrice getTicketPriceByChairType_IdAndTypeTicket_Id(Long chairTypeId, Long typeTicketId);
+
+    List<TicketPrice> getAllEntity();
 
 }

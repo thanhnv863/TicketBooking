@@ -1,5 +1,6 @@
 package com.example.be.employee.message.response;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,10 +10,10 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @NoArgsConstructor
-//@AllArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-//@Builder
+@Builder
 public class TicketResponse {
     private Long id;
     private BigDecimal price;

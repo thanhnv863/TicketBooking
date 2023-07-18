@@ -31,6 +31,9 @@ public class TypeTicket {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "note")
+    private String note;
+
     @Column(name = "status")
     private Integer status;
 

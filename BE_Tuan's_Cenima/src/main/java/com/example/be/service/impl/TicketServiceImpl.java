@@ -42,7 +42,7 @@ public class TicketServiceImpl implements TicketService {
     //1 - printed
     //2 - unprinted
 //ban off => truyen vao status 1, dat on => truyen vao status 2 khi saves
-
+//update trạng thái thui nha
     @Override
     public TicketResponse save(TicketRequest ticketRequest) {
         TypeTicket typeTicket = typeTicketRepository.findById(ticketRequest.getIdTypeTickket()).get();
@@ -101,4 +101,22 @@ public class TicketServiceImpl implements TicketService {
         return ticketRepository.getTicketByCodeCustomer(customerCode, pageable);
     }
 
+    @Override
+    public Page<TicketResponse> searchTicket(String inputSearch, Integer pageNo) {
+        Pageable pageable = PageRequest.of(pageNo, 1000);
+        return ticketRepository.searchTicket(inputSearch, pageable);
+    }
+
+    @Override
+    public Ticket getOne(Long id) {
+        return ticketRepository.findById(id).orElseThrow(() -> new RuntimeException("?"));
+    }
+
+    @Override
+    public TicketResponse updateStatusTicket(Long idTicket, Integer status) {
+        Ticket ticket = ticketRepository.findById(idTicket).get();
+        ticket.setStatus(status);
+        ticketRepository.save(ticket);
+        return ticketRepository.getTicket(idTicket);
+    }
 }

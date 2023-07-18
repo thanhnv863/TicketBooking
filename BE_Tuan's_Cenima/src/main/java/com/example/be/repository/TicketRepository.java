@@ -44,15 +44,19 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
             " ORDER BY ot.ticket.createdTime DESC")
     Page<TicketResponse> getTicketByCodeCustomer(@Param("customerCode") String customerCode, Pageable pageable);
 
-//    @Query("SELECT NEW com.example.be.employee.message.response.TicketResponse" +
-//            "(ot.price, ot.ticket.code, ot.order.customer.code," +
-//            "ot.order.employee.code, ot.order.code," +
-//            "ot.ticket.chair.name, ot.ticket.chair.chairType.name, ot.ticket.status," +
-//            "ot.ticket.createdTime, ot.ticket.id, ot.ticket.showTime.room.name," +
-//            "ot.ticket.showTime.time, ot.ticket.showTime.movie.name)" +
-//            "FROM OrderTicket ot WHERE ot.order.customer.code LIKE CONCAT('%', :customerCode, '%') " +
-//            "OR ot.order.customer.phoneNumber LIKE CONCAT('%', :phoneNumber, '%')" +
-//            "ORDER BY ot.ticket.createdTime DESC")
-//    Page<TicketResponse> findTicketsByCustomerCode(@Param("customerCode") String customerCode);
+    @Query("SELECT NEW com.example.be.employee.message.response.TicketResponse" +
+            "(ot.price, ot.ticket.code, ot.order.customer.code," +
+            "ot.order.employee.code, ot.order.code," +
+            "ot.ticket.chair.name, ot.ticket.chair.chairType.name, ot.ticket.status," +
+            "ot.ticket.createdTime, ot.ticket.id, ot.ticket.showTime.room.name," +
+            "ot.ticket.showTime.time, ot.ticket.showTime.movie.name)" +
+            " FROM OrderTicket ot WHERE ot.order.customer.code LIKE CONCAT('%', :inputSearch, '%') " +
+            " OR ot.order.employee.code LIKE CONCAT('%', :inputSearch, '%')" +
+            " OR ot.order.code LIKE CONCAT('%', :inputSearch, '%')" +
+            " ORDER BY ot.ticket.createdTime DESC")
+    Page<TicketResponse> searchTicket(
+            @Param("inputSearch") String inputSearch,
+            Pageable pageable
+    );
 
 }
