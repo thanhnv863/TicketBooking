@@ -10,6 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TicketRequest {
+    private Long id;
     private Long idChair;
     private Long idTypeTickket;
     private Long idShowTime;

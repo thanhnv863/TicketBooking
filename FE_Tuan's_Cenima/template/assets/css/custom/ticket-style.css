@@ -1,3 +1,41 @@
 .ticket-style {
   color: black;
 }
+.ticket-price {
+  background-color: white;
+  height: 50%;
+}
+.type-ticket {
+  border-right: 2px solid white;
+  background-color: white;
+  height: 50%;
+}
+/* css dialog */
+#dialog-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#dialog {
+  background-color: #fff;
+  padding: 20px;
+  max-width: 800px;
+}
+
+#dialog h2 {
+  margin-top: 0;
+}
+
+#dialog button {
+  margin-top: 10px;
+}
+.dialog-detail-ticket {
+  width: 100%;
+}

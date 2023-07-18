@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class TicketPriceServiceImpl implements TicketPriceService {
@@ -64,6 +65,11 @@ public class TicketPriceServiceImpl implements TicketPriceService {
     @Override
     public TicketPrice getTicketPriceByChairType_IdAndTypeTicket_Id(Long chairTypeId, Long typeTicketId) {
         return ticketPriceRepository.getTicketPriceByChairType_IdAndTypeTicket_Id(chairTypeId, typeTicketId);
+    }
+
+    @Override
+    public List<TicketPrice> getAllEntity() {
+        return ticketPriceRepository.findAll();
     }
 
     private TicketPriceResponse convertTicketPriceToRes(TicketPrice ticketPrice) {
