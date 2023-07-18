@@ -53,7 +53,7 @@ public class Customer {
 
     @NotNull
     @Column(name = "phone_number")
-    private Integer phoneNumber;
+    private String phoneNumber;
 
     @NotNull
     @Column(name = "status")
