@@ -26,6 +26,7 @@
         class="form-select"
         ng-change="filterTicketByStatus(cbbStatusTicketFilter)"
         ng-init="cbbStatusTicketFilter = '3'"
+        style="border-radius: 10px; margin-bottom: 10px; height: 30px"
       >
         <option value="1">Printed</option>
         <option value="2">Unprinted</option>
@@ -145,6 +146,7 @@
                 class="form-select"
                 ng-change="filterTicketByStatus(cbbStatusTicketFilter)"
                 ng-init="cbbStatusTicketFilter = '3'"
+                style="border-radius: 10px; margin-bottom: 10px; height: 30px"
               >
                 <option value="1">Active</option>
                 <option value="0">Unactive</option>
@@ -193,7 +195,13 @@
                   </tbody>
                 </table>
                 <div class="d-grid gap-2 col-12 mx-auto">
-                  <button class="btn btn-secondary" type="button">Them</button>
+                  <button
+                    class="btn btn-secondary"
+                    type="button"
+                    style="width: 100%"
+                  >
+                    Them
+                  </button>
                 </div>
               </div>
             </div>
@@ -246,7 +254,13 @@
                   </tbody>
                 </table>
                 <div class="d-grid gap-2 col-12 mx-auto">
-                  <button class="btn btn-secondary" type="button">Them</button>
+                  <button
+                    class="btn btn-secondary"
+                    type="button"
+                    style="width: 100%"
+                  >
+                    Them
+                  </button>
                 </div>
               </div>
             </div>

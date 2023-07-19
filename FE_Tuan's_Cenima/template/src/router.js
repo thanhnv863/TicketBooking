@@ -56,7 +56,8 @@ app.config(function ($routeProvider, $locationProvider) {
       templateUrl: "../src/pages/sell.html",
     })
     .when("/order", {
-      templateUrl: "../src/pages/order.html",
+      templateUrl: "../src/pages/order/order.html",
+      controller: orderController,
     })
     .when("/staff", {
       templateUrl: "../src/pages/account/staff.html",
@@ -66,6 +67,10 @@ app.config(function ($routeProvider, $locationProvider) {
     })
     .when("/addMovie", {
       templateUrl: "../src/pages/films/movie/addMovie.html",
+    })
+    .when("/detail/:id", {
+      templateUrl: "../src/pages/order/detail.html",
+      controller: detailOrderController,
     })
     .otherwise("/sell");
 });
