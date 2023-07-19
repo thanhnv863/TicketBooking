@@ -21,6 +21,7 @@
         ><b>Trạng thái:</b></label
       >
       <select
+        style="border-radius: 10px; margin-bottom: 10px; height: 30px"
         ng-model="cbbStatusTicketFilter"
         id="cbbTrangThaiFilter"
         class="form-select"
@@ -76,15 +77,6 @@
               <td class="text-center">{{ticket.createdTime}}</td>
               <td class="text-center">
                 <span ng-if="ticket.status == 1">printed</span>
-                <!-- <span ng-if="ticket.status == 2"
-                  ><button
-                    type="button"
-                    class="btn btn-danger"
-                    ng-click="updateStatusTicket(ticket.id)"
-                  >
-                    {{ticket.id}}
-                  </button></span
-                > -->
                 <span ng-if="ticket.status == 2">
                   <button
                     type="button"
@@ -273,14 +265,33 @@
   <div id="dialog-overlay" style="display: none">
     <div id="dialog" class="dialog-detail-ticket">
       <!-- Nội dung của hộp thoại -->
-      <h2 class="text-center">TUAN'S CINEMA</h2>
-      <p>+--------------Thong tin ve--------------+</p>
-      <br />
-
+      <h2 class="text-center">TICKET - TUAN'S CINEMA</h2>
       <div class="row">
-        <p class="col-6">Nhan vien: {{ticket.createdBy}}</p>
+        <p class="col-6">Nhan vien: {{ticketDetail.createdBy}}</p>
+        <p class="col-6">Khach hang: {{ticketRes.customerCode}}</p>
       </div>
-      Thoi gian:
+      <div class="row">
+        <p class="col-6">Phong: {{ticketDetail.showTime.room.name}}</p>
+        <p class="col-6">Loai ve: {{ticketRes.customerCode}}</p>
+      </div>
+      <div class="row">
+        <p class="col-6">Ghe: {{ticketDetail.showTime.room.name}}</p>
+        <p class="col-6">Gia: {{ticketRes.customerCode}}</p>
+      </div>
+      <div class="row">
+        <p class="col-6">Loai ghe: {{ticketDetail.showTime.room.name}}</p>
+      </div>
+      <div class="row">
+        <p class="col-6">Phim: {{ticketDetail.showTime.room.name}}</p>
+        <p class="col-6">Xuat chieu: {{ticketRes.customerCode}}</p>
+      </div>
+      <div class="row">
+        <p class="col-6">Thoi gian: {{ticketDetail.showTime.room.name}}</p>
+        <p class="col-6">Tuoi gioi han: {{ticketRes.customerCode}}</p>
+      </div>
+      <div class="row">
+        <p class="col-6">Trang thai: {{ticketDetail.showTime.room.name}}</p>
+      </div>
       <button ng-click="hideDialog()">Đóng</button>
     </div>
   </div>
