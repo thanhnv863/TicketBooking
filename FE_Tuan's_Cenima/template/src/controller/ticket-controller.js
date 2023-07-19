@@ -141,13 +141,13 @@ window.ticketController = function ($scope, $http, $rootScope) {
         $scope.ticketDetail = response.data;
         console.log($scope.ticketDetail);
       });
-    $scope.disableScroll();
+    // $scope.disableScroll();
   };
 
   $scope.hideDialog = function () {
     var overlay = document.getElementById("dialog-overlay");
     overlay.style.display = "none";
-    $scope.enableScroll();
+    // $scope.enableScroll();
   };
   // sự kiện scroll
   // $scope.disableScroll = function () {
