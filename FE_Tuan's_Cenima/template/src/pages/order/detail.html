@@ -1,0 +1,327 @@
+<div
+  class="container"
+  style="
+    border: 2px solid rgb(217, 217, 217);
+    height: 300px;
+    border-radius: 5px;
+    box-shadow: 0px 3px 3px 0px rgb(110, 110, 110);
+    margin-bottom: 10px;
+  "
+>
+  <div
+    class="container"
+    style="background-color: #fff; height: 200px; border-radius: 10px"
+  >
+    <div class="row">
+      <div class="col-md-12">
+        <div class="timeline" style="color: black">
+          <!-- Timeline events will be dynamically generated here -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container" style="margin-top: 20px">
+    <div class="row">
+      <div class="col-md-6 d-flex justify-content-start">
+        <button
+          type="button"
+          class="btn btn-danger"
+          style="height: 50px; width: 150px; color: rgb(231, 229, 229)"
+        >
+          Hủy Đơn
+        </button>
+      </div>
+      <div class="col-md-6 d-flex justify-content-end">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          style="
+            height: 50px;
+            width: 150px;
+            color: black;
+            box-shadow: 2px 5px rgb(100, 100, 100);
+          "
+          ng-click="openFrame()"
+        >
+          Chi tiết
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- framechiTietOrderTimeLine -->
+<div class="frame-container" id="frameContainer">
+  <div class="frame-content">
+    <!-- Nội dung của frame con -->
+    <div class="table_table">
+      <!-- <h4>List Order</h4> -->
+      <div class="table-responsive table-rounded">
+        <table
+          class="table table-borderless table-striped table-hover table-full-width bg-white"
+        >
+          <thead>
+            <tr>
+              <th class="text-center"></th>
+              <th class="text-center">Date Time</th>
+              <th class="text-center">Người Xác Nhận</th>
+              <th class="text-center">Ghi Chú</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              ng-repeat="orderTimeLine in listOrderTimeLine"
+              ng-click="redirectToDetail(order.id)"
+            >
+              <td class="text-center">
+                <span
+                  ng-if="orderTimeLine.type == 'Created'"
+                  class="btn btn-success"
+                  style="border-radius: 20px"
+                  >{{orderTimeLine.type}}</span
+                >
+                <span
+                  ng-if="orderTimeLine.type == 'Updated'"
+                  class="btn btn-warning"
+                  style="border-radius: 20px"
+                  >{{orderTimeLine.type}}</span
+                >
+                <span
+                  ng-if="orderTimeLine.type == 'Cancelled'"
+                  class="btn btn-danger"
+                  style="border-radius: 20px"
+                  >{{orderTimeLine.type}}</span
+                >
+              </td>
+              <td class="text-center">{{orderTimeLine.createdTime}}</td>
+              <td class="text-center">{{orderTimeLine.employee.name}}</td>
+              <td class="text-center">{{orderTimeLine.note}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!--  -->
+    <button
+      class="btn text-white"
+      style="
+        background-color: #55acee;
+        width: 100px;
+        margin-top: 20px;
+        float: right;
+        border-radius: 40px 5px 5px 40px;
+      "
+      role="button"
+      ng-click="closeFrame()"
+    >
+      <i class="mdi mdi-backspace" style="color: #fff; height: 30px"></i>
+    </button>
+  </div>
+</div>
+<!--  -->
+<div
+  class="container"
+  style="
+    border: 2px solid rgb(217, 217, 217);
+    height: 200px;
+    box-shadow: 0px 3px 3px 0px rgb(110, 110, 110);
+    margin-top: 20px;
+  "
+>
+  <div class="row">
+    <div class="col-4">
+      <h3
+        style="margin-top: 13px; margin-left: 10px; color: rgb(105, 105, 105)"
+      >
+        THÔNG TIN ĐƠN HÀNG
+      </h3>
+    </div>
+    <div
+      class="col-7 d-flex justify-content-end"
+      style="margin-top: 5px; margin-left: 85px"
+    >
+      <button
+        class="btn text-white"
+        style="background-color: #55acee; width: 150px"
+        role="button"
+      >
+        <i class="mdi mdi-square-edit-outline" style="color: #fff"></i>
+        Cập nhật
+      </button>
+    </div>
+  </div>
+  <hr />
+  <h5>Mã Code: {{orderDetail.code}}</h5>
+  <h5>
+    Trạng Thái:
+    <span ng-if="orderDetail.status === 1" class="btn btn-primary"
+      >Chờ thanh toán</span
+    >
+    <span ng-if="orderDetail.status === 2" class="btn btn-success"
+      >Đã thanh toán</span
+    >
+    <span ng-if="orderDetail.status === 3" class="btn btn-danger">Hủy</span>
+  </h5>
+  <h5>Họ Và Tên: {{orderDetail.customer.name}}</h5>
+</div>
+<!--  -->
+<div
+  class="container"
+  style="
+    border: 2px solid rgb(217, 217, 217);
+    margin-top: 20px;
+    box-shadow: 0px 3px 3px 0px rgb(110, 110, 110);
+  "
+>
+  <div class="row">
+    <h3 style="margin-top: 13px; margin-left: 10px; color: rgb(105, 105, 105)">
+      XÁC NHẬN THANH TOÁN
+    </h3>
+    <div
+      class="col-8 d-flex justify-content-end"
+      style="margin-top: 5px; margin-left: 80px"
+    >
+      <button
+        class="btn text-white"
+        style="background-color: #55eec5; width: 200px"
+        role="button"
+      >
+        <i class="mdi mdi-cards" style="color: #fff"></i>
+        Xác nhận thanh toán
+      </button>
+    </div>
+  </div>
+
+  <hr />
+  <span
+    ng-if="listSalePayMent == null || listSalePayMent.length === 0"
+    style="color: rgb(91, 91, 91)"
+  >
+    Không có dữ liệu
+  </span>
+</div>
+<!-- OrderTicket -->
+<div
+  class="container"
+  style="
+    border: 2px solid rgb(217, 217, 217);
+    margin-top: 20px;
+    box-shadow: 0px 3px 3px 0px rgb(110, 110, 110);
+  "
+>
+  <div class="row">
+    <div class="col-3">
+      <h3 style="margin-top: 13px; margin-left: 0px; color: rgb(105, 105, 105)">
+        VÉ
+      </h3>
+    </div>
+    <div
+      class="col-8 d-flex justify-content-end"
+      style="margin-top: 5px; margin-left: 85px"
+    >
+      <button
+        class="btn text-white"
+        style="background-color: #55acee; width: 150px"
+        role="button"
+      >
+        <i class="mdi mdi-square-edit-outline" style="color: #fff"></i>
+        Cập nhật
+      </button>
+    </div>
+  </div>
+  <hr />
+  <div ng-if="listOrderTicket == null || listOrderTicket.length === 0">
+    <span style="color: rgb(91, 91, 91)">Không có dữ liệu</span>
+  </div>
+  <div ng-if="listOrderTicket != null && listOrderTicket.length > 0">
+    <div class="table_table">
+      <h6 style="margin-top: 10px; color: rgb(74, 74, 74)">LIST TICKETS</h6>
+      <div class="table-responsive table-rounded">
+        <table
+          class="table table-borderless table-striped table-hover table-full-width bg-white"
+        >
+          <thead>
+            <tr>
+              <th class="text-center">STT</th>
+              <th class="text-center">Ticket</th>
+              <th class="text-center">Phim</th>
+              <th class="text-center">ShowTime</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="orderTicket in listOrderTicket">
+              <td class="text-center">{{$index+1}}</td>
+              <td class="text-center">{{orderTicket.ticket.id}}</td>
+              <th class="text-center">
+                {{orderTicket.ticket.showTime.movie.name}}
+              </th>
+              <th class="text-center">{{orderTicket.ticket.showTime.time}}</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- OrderSnack -->
+<div
+  class="container"
+  style="
+    border: 2px solid rgb(217, 217, 217);
+    margin-top: 20px;
+    box-shadow: 0px 3px 3px 0px rgb(110, 110, 110);
+  "
+>
+  <div class="row">
+    <div class="col-3">
+      <h3 style="margin-top: 13px; margin-left: 0px; color: rgb(105, 105, 105)">
+        ĐỒ ĂN
+      </h3>
+    </div>
+    <div
+      class="col-8 d-flex justify-content-end"
+      style="margin-top: 5px; margin-left: 85px"
+    >
+      <button
+        class="btn text-white"
+        style="background-color: #55acee; width: 150px"
+        role="button"
+      >
+        <i class="mdi mdi-square-edit-outline" style="color: #fff"></i>
+        Cập nhật
+      </button>
+    </div>
+  </div>
+  <hr />
+  <div ng-if="listOrderSnack == null || listOrderSnack.length === 0">
+    <span style="color: rgb(91, 91, 91)">Không có dữ liệu</span>
+  </div>
+  <div ng-if="listOrderSnack != null && listOrderSnack.length > 0">
+    <div class="table_table">
+      <h6 style="margin-top: 10px; color: rgb(74, 74, 74)">LIST SNACKS</h6>
+      <div class="table-responsive table-rounded">
+        <table
+          class="table table-borderless table-striped table-hover table-full-width bg-white"
+        >
+          <thead>
+            <tr>
+              <th class="text-center">STT</th>
+              <th class="text-center">Snacks</th>
+              <th class="text-center">ComBo</th>
+              <th class="text-center">Price</th>
+              <th class="text-center">Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="orderSnack in listOrderSnack">
+              <td class="text-center">{{$index + 1}}</td>
+              <td class="text-center">{{orderSnack.snacks.name}}</td>
+              <td class="text-center">{{orderSnack.combo.name}}</td>
+              <td class="text-center">{{orderSnack.price}}</td>
+              <td class="text-center">{{orderSnack.quanitty}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

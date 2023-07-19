@@ -1,0 +1,15 @@
+.date-input {
+  display: flex;
+  flex-direction: column;
+}
+
+.date-input label {
+  color: rgb(49, 49, 49);
+  margin-bottom: 5px;
+}
+
+.date-input input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}

@@ -1,0 +1,133 @@
+<section class="page-content">
+  <div class="row">
+    <div class="col-4">
+      <section class="search-and-user" style="margin-top: 28px; left: 0px">
+        <form>
+          <input
+            type="search"
+            placeholder="Search Order"
+            style="font-size: 15px; color: rgb(53, 53, 53)"
+          />
+          <button type="submit" aria-label="submit form">
+            <span class="mdi mdi-magnify"></span>
+          </button>
+        </form>
+      </section>
+    </div>
+    <div class="col-1">
+      <button
+        type="button"
+        class="btn btn-outline-warning"
+        style="height: 48px; width: 100px; margin-left: 0px; margin-top: 28px"
+      >
+        Làm mới
+      </button>
+    </div>
+    <div class="col-5" style="margin-left: 50px">
+      <form>
+        <div class="row">
+          <div class="date-input" style="width: 200px">
+            <label for="start-date">Từ ngày</label>
+            <input type="date" id="start-date" name="start-date" />
+          </div>
+          <div class="date-input" style="width: 200px; margin-left: 20px">
+            <label for="start-date">Đến ngày</label>
+            <input type="date" id="start-date" name="start-date" />
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-1">
+      <button
+        type="button"
+        class="btn btn-primary"
+        style="
+          width: 150px;
+          height: 48px;
+          margin-right: 100px;
+          margin-top: 28px;
+          box-shadow: 5px 6px black;
+        "
+      >
+        + Add Order
+      </button>
+    </div>
+  </div>
+  <!-- sort -->
+  <div class="container">
+    <h6>sort đang làm..</h6>
+  </div>
+  <!--  -->
+  <div class="table_table">
+    <!-- <h4>List Order</h4> -->
+    <div class="table-responsive table-rounded">
+      <table
+        class="table table-borderless table-striped table-hover table-full-width bg-white"
+      >
+        <thead>
+          <tr>
+            <th class="text-center">STT</th>
+            <th class="text-center">Code</th>
+            <th class="text-center">Customer</th>
+            <th class="text-center">Employee</th>
+            <th class="text-center">Total_amount</th>
+            <th class="text-center">Total_after_reduction</th>
+            <th class="text-center">Date</th>
+            <th class="text-center">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            ng-repeat="order in listOrder"
+            ng-click="redirectToDetail(order.id)"
+          >
+            <td class="text-center">{{$index+1}}</td>
+            <td class="text-center">{{order.code}}</td>
+            <th class="text-center">{{order.customer.name}}</th>
+            <th class="text-center">{{order.employee.name}}</th>
+            <td class="text-center">{{order.totalAmount}}</td>
+            <td class="text-center">{{order.totalAfterReduction}}</td>
+            <td class="text-center">{{order.orderDate}}</td>
+            <td class="text-center">
+              <span
+                ng-if="order.status==1"
+                class="btn btn-warning"
+                style="border-radius: 20px"
+                >Chờ Thanh Toán</span
+              >
+              <span
+                ng-if="order.status==2"
+                class="btn btn-success"
+                style="border-radius: 20px"
+                >Đã Hoàn Thành</span
+              >
+              <span
+                ng-if="order.status==3"
+                class="btn btn-danger"
+                style="border-radius: 20px"
+                >Đã Hủy</span
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</section>
